@@ -38,18 +38,23 @@ function runGame(gameType) {
  * the returned calculatedCorrectAnswer
  */
 function checkAnswer() {
-  let userAnswer = parseInt(document.getElementById("answer-box").value);
-  let calculatedAnswer = calculateCorrectAnswer();
-  let isCorrect = userAnswer === calculatedAnswer[0];
-  if (isCorrect) {
-    alert("Hey! You got it right! :D");
-    incrementScore();
+  console.log(document.getElementById("answer-box").value);
+  if (document.getElementById("answer-box").value === "") {
+    alert("Please input your answer.");
   } else {
-    alert(`Awww...you answered ${userAnswer}. the correct answer was ${calculatedAnswer[0]}!`);
-    incrementWrongAnswer();
-  }
+    let userAnswer = parseInt(document.getElementById("answer-box").value);
+    let calculatedAnswer = calculateCorrectAnswer();
+    let isCorrect = userAnswer === calculatedAnswer[0];
+    if (isCorrect) {
+      alert("Hey! You got it right! :D");
+      incrementScore();
+    } else {
+      alert(`Awww...you answered ${userAnswer}. the correct answer was ${calculatedAnswer[0]}!`);
+      incrementWrongAnswer();
+    }
 
-  runGame(calculatedAnswer[1]);
+    runGame(calculatedAnswer[1]);
+  }
 }
 
 /**
