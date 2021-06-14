@@ -4,7 +4,7 @@ function runGame(){
 function checkAnswer(){
 
 }
-function calculateCorrectAnswer()){
+function calculateCorrectAnswer(){
 
 }
 function incrementScort(){
