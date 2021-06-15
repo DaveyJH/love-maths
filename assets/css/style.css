@@ -220,6 +220,9 @@ body {
   .btn--gray {
       margin-top: 0;
   }
+  .question-area {
+    padding: 0 0 5%;
+}
 
   .score-area {
       width: 100%;
