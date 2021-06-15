@@ -13,6 +13,11 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     })
   }
+  document.getElementById("answer-box").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      checkAnswer();
+    }
+  })
   runGame("addition");
 })
 /**
@@ -21,15 +26,20 @@ document.addEventListener("DOMContentLoaded", function() {
  */
 function runGame(gameType) {
 
+  document.getElementById("answer-box").value = "";
+  document.getElementById("answer-box").focus();
   //create two random numbers between 1 and 25 (inclusive)
   let num1 = Math.ceil(Math.random() * 25);
   let num2 = Math.ceil(Math.random() * 25);
 
   if (gameType === "addition") {
     displayAdditionQuestion(num1, num2);
-  } else {
-    alert(`Unknown game type: ${gameType}`);
-    throw `Unknown game type: ${gameType}. Aborting!`;
+  } else if (gameType === "subtract") {
+    displaySubtractQuestion(num1, num2);
+  } else if (gameType === "multiply") {
+    displayMultiplyQuestion(num1, num2);
+  } else if (gameType === "division") {
+    displayDivideQuestion(num1, num2);
   }
 }
 
@@ -68,9 +78,12 @@ function calculateCorrectAnswer() {
 
   if (operator === "+") {
     return [operand1 + operand2, "addition"];
-  } else {
-    alert(`Unimplemented operator ${operator}`);
-    throw `Unimplemented operator ${operator}. Aborting!`;
+  } else if (operator ==="-") {
+    return [operand1 - operand2, "subtract"];
+  } else if (operator ==="\u00d7") {
+    return [operand1 * operand2, "multiply"];
+  } else if (operator ==="\u00f7") {
+    return [operand1 / operand2, "division"];
   }
 }
 
@@ -94,12 +107,18 @@ function displayAdditionQuestion(operand1, operand2) {
   document.getElementById("operand2").textContent = operand2;
   document.getElementById("operator").textContent = "+";
 }
-function displaySubtractQuestion() {
-  
+function displaySubtractQuestion(operand1, operand2) {
+    document.getElementById("operand1").textContent = operand1 > operand2 ? operand1 : operand2;
+    document.getElementById("operand2").textContent = operand1 < operand2 ? operand1 : operand2;
+    document.getElementById("operator").textContent = "-";
 }
-function displayMultiplyQuestion() {
-  
+function displayMultiplyQuestion(operand1, operand2) {
+  document.getElementById("operand1").textContent = operand1;
+  document.getElementById("operand2").textContent = operand2;
+  document.getElementById("operator").textContent = "\u00d7";  
 }
-function displayDivideQuestion() {
-  
+function displayDivideQuestion(operand1, operand2) {
+  document.getElementById("operand1").textContent = operand1 * operand2;
+  document.getElementById("operand2").textContent = operand2;
+  document.getElementById("operator").textContent = "\u00f7";  
 }
